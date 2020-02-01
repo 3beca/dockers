@@ -1,19 +1,21 @@
 version: '3'
 services:
-  cep-mongodb:
+  notifier-mongodb:
     image: mongo:4.2.0
     environment:
       - MONGO_DATA_DIR=/data/db
     volumes:
-      - cep-mongodb-storage:/data/db
+      - notifier-mongodb-storage:/data/db
     ports:
       - 27017:27017
-  cep:
-    image: francescorivola/tribeca-cep:latest
+  notifier:
+    image: francescorivola/tribeca-notifier:latest
     environment:
-      - MONGODB_URL=mongodb://cep-mongodb:27017
-      - HTTP_HOST=0.0.0.0
+      - NODE_ENV=production
+      - MONGODB_URL=mongodb://notifier-mongodb:27017
+      - DATABASE_NAME=tribeca_notifier
+      - HTTP_PORT=30701
     ports:
-      - "8888:8888"
+      - "30701:30701"
 volumes:
-  cep-mongodb-storage:
+  notifier-mongodb-storage:
