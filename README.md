@@ -1,21 +1,23 @@
 # cep
 A simple complex event processing system
-[Documentation](https://www.codefactor.io/repository/github/3beca/cep)
+
+[Documentation](https://github.com/3beca/cep)
 
 ## Getting Started
 
 ```
-curl 
+curl https://raw.githubusercontent.com/3beca/dockers/master/CEP/docker-compose.yml -o docker-compose.yml
 docker-compose up -d 
 ```
 
 # notifier
-A simple complex event processing system
-[Documentation](https://www.codefactor.io/repository/github/3beca/cep)
+A simple notifier service
+
+[Documentation](https://github.com/3beca/notifier)
 
 ## Getting Started
 
 ```
-curl 
+curl https://raw.githubusercontent.com/3beca/dockers/master/NOTIFIER/docker-compose.yml -o docker-compose.yml
 docker-compose up -d 
 ```
