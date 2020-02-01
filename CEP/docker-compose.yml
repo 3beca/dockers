@@ -13,7 +13,8 @@ services:
     environment:
       - MONGODB_URL=mongodb://cep-mongodb:27017
       - HTTP_HOST=0.0.0.0
+      - HTTP_PORT=30703
     ports:
-      - "8888:8888"
+      - "30703:30703"
 volumes:
   cep-mongodb-storage:
