@@ -1,0 +1,58 @@
+version: '2'
+services:
+  influxdb:
+    image: influxdb
+    ports:
+      - 8086:8086
+    volumes:
+      - influxdb-storage:/var/lib/influxdb
+    restart: always
+  grafana:
+    image: grafana/grafana
+    ports:
+      - 3000:3000
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    restart: always
+  mongodb:
+    image: mongo:4.2.0
+    environment:
+      - MONGO_DATA_DIR=/data/db
+    volumes:
+      - mongodb-storage:/data/db
+    ports:
+      - 27017:27017
+    restart: always
+  cep:
+    image: francescorivola/tribeca-cep:latest
+    environment:
+      - MONGODB_URL=mongodb://mongodb:27017
+      - HTTP_HOST=0.0.0.0
+      - HTTP_PORT=30703
+    ports:
+      - "30703:30703"
+    restart: always
+  mapper:
+    image: francescorivola/tribeca-mapper:latest
+    environment:
+      - NODE_ENV=production
+      - MONGODB_URL=mongodb://mongodb:27017
+      - DATABASE_NAME=tribeca_mapper
+      - HTTP_PORT=30702
+    ports:
+      - "30702:30702"
+    restart: always
+  notifier:
+    image: francescorivola/tribeca-notifier:latest
+    environment:
+      - NODE_ENV=production
+      - MONGODB_URL=mongodb://mongodb:27017
+      - DATABASE_NAME=tribeca_notifier
+      - HTTP_PORT=30701
+    ports:
+      - "30701:30701"
+    restart: always
+volumes:
+  grafana-storage:
+  influxdb-storage:
+  mongodb-storage:
