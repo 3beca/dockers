@@ -1,0 +1,26 @@
+version: '3'
+services:
+  cep-mongodb:
+    image: mongo:4.2.0
+    environment:
+      - MONGO_DATA_DIR=/data/db
+    volumes:
+      - cep-mongodb-storage:/data/db
+    ports:
+      - 27017:27017
+  cep:
+    image: francescorivola/tribeca-cep:latest
+    environment:
+      - MONGODB_URL=mongodb://cep-mongodb:27017
+      - HTTP_HOST=0.0.0.0
+      - HTTP_PORT=30703
+    ports:
+      - "30703:30703"
+  cep-ui:
+    image: francescorivola/tribeca-cep-ui:latest
+    environment:
+      - BASE_URL=http://localhost:30703
+    ports:
+      - "30704:80"
+volumes:
+  cep-mongodb-storage:
