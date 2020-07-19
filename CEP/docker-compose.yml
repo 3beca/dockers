@@ -14,16 +14,7 @@ services:
       - MONGODB_URL=mongodb://cep-mongodb:27017
       - HTTP_HOST=0.0.0.0
       - HTTP_PORT=30703
-      - TRIBECA_SCHEDULER_SERVICE_HOST=scheduler
-      - TRIBECA_SCHEDULER_SERVICE_PORT=30702
-      - INTERNAL_HTTP_HOST=cep
     ports:
       - "30703:30703"
-  scheduler:
-    image: francescorivola/tribeca-scheduler:latest
-    environment:
-      - MONGODB_URL=mongodb://cep-mongodb:27017
-      - HTTP_HOST=0.0.0.0
-      - HTTP_PORT=30702
 volumes:
   cep-mongodb-storage:
