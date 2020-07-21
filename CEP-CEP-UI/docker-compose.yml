@@ -11,16 +11,19 @@ services:
   cep:
     image: francescorivola/tribeca-cep:latest
     environment:
-      - MONGODB_URL=mongodb://cep-mongodb:27017
-      - HTTP_HOST=0.0.0.0
-      - HTTP_PORT=30703
+      - CEP_MONGODB_URL=mongodb://cep-mongodb:27017
+      - CEP_ADMIN_HTTP_HOST=0.0.0.0
+      - CEP_ADMIN_HTTP_PORT=8888
+      - CEP_EVENT_PROCESSING_HTTP_HOST=0.0.0.0
+      - CEP_EVENT_PROCESSING_HTTP_PORT=8889
     ports:
-      - "30703:30703"
+      - "8888:8888"
+      - "8889:8889"
   cep-ui:
     image: francescorivola/tribeca-cep-ui:latest
     environment:
-      - BASE_URL=http://localhost:30703
+      - BASE_URL=http://localhost:8888
     ports:
-      - "30704:80"
+      - "8890:80"
 volumes:
   cep-mongodb-storage:
